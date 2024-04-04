@@ -1,0 +1,207 @@
+/* M PLUS Rounded 1c 400, 500, 700 */
+@import "https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:regular,500,700&display=swap";
+/* Ubuntu  Mono 400 */
+@import 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap';
+/* Reset styles v3.0.0 */
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  display: inline-block;
+}
+
+html,
+body {
+  line-height: 1.4;
+  height: 100%;
+}
+
+a {
+  text-decoration: unset;
+  color: unset;
+  display: inline-block;
+}
+
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: unset;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form */
+input,
+button,
+textarea {
+  font: unset;
+  color: unset;
+  background-color: unset;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+button,
+select,
+option {
+  cursor: pointer;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  appearance: unset;
+}
+
+/* End of the reset styles */
+:root {
+  font-size: 0.0625rem;
+}
+
+body {
+  line-height: 1.4;
+  font-size: 18rem;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  background-color: hsl(0, 0%, 98%);
+}
+
+[class*=__container] {
+  max-width: 1202rem;
+  margin-inline: auto;
+  padding-inline: 16rem;
+}
+
+code {
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.button {
+  background-color: hsl(0, 0%, 48%);
+  color: hsl(0, 0%, 100%);
+  padding: 1em 2em;
+  border-radius: 9in;
+  transition: 0.2s background-color;
+}
+.button:hover, .button:focus-visible {
+  background-color: rosybrown;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.header {
+  background-color: hsl(0, 0%, 100%);
+}
+
+.validator__container {
+  padding-block: 32rem;
+}
+.validator__container > :not(:last-child) {
+  margin-bottom: 32rem;
+}
+.validator__main > :not(:last-child) {
+  margin-bottom: 24rem;
+}
+.validator__title {
+  text-align: center;
+  font-size: 32rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 40%);
+}
+.validator__title span {
+  color: rosybrown;
+}
+.validator__textarea {
+  font-family: "Ubuntu Mono", monospace;
+  resize: none;
+  height: 300px;
+  border: 2rem solid hsl(0, 0%, 83%);
+  border-radius: 1em;
+  padding: 1em;
+  background: #fafafa;
+  box-shadow: 20rem 20rem 60rem #d5d5d5, -20rem -20rem 60rem #ffffff;
+}
+@media only all and (max-width: 29.99em) {
+  .validator__button {
+    width: 100%;
+  }
+}
+.validator__result {
+  border-top: 1px solid hsl(0, 0%, 93%);
+  padding-top: 18rem;
+}
+
+.result > * + * {
+  margin-top: 1em;
+}
+.result__title {
+  font-size: 24rem;
+  font-weight: 500;
+  text-align: center;
+  color: hsl(0, 0%, 40%);
+}
+.result__list > * + * {
+  margin-top: 1em;
+}
+.item-result {
+  background-color: hsla(0, 100%, 67%, 0.05);
+  padding: 1em;
+  border-radius: 1em;
+}
+.item-result > * + * {
+  margin-top: 0.5em;
+}
+.item-result__label {
+  color: hsl(0, 100%, 67%);
+}
+.item-result__desc {
+  font-size: 17rem;
+}
+.item-result__desc span {
+  color: hsl(0, 100%, 67%);
+}
+
+.footer {
+  border-top: 1px solid hsl(0, 0%, 93%);
+  background-color: hsl(0, 0%, 100%);
+}
+.footer__container {
+  padding-block: 32rem;
+}
+.footer__paragraph {
+  text-align: center;
+  font-size: 16rem;
+}

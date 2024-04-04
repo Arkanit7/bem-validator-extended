@@ -246,7 +246,7 @@ function insertErrors(errors) {
 		</p>
 		<p class="item-result__desc">
 			<code>
-				${'.' + error.parentArray.join(' > .') + ' >'}
+				.${error.parentArray.join(' > .')} >
 				<span>.${error.className}</span></code
 			>
 		</p>

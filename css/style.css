@@ -1,5 +1,5 @@
-/* M PLUS Rounded 1c 400, 500, 700 */
-@import "https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:regular,500,700&display=swap";
+/* Noto Sans 100-900 */
+@import 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono&display=swap';
 /* Ubuntu  Mono 400 */
 @import 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap';
 /* Reset styles v3.0.0 */
@@ -85,8 +85,8 @@ textarea {
 
 body {
   line-height: 1.4;
-  font-size: 18rem;
-  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-size: 16rem;
+  font-family: "Noto Sans", sans-serif;
   background-color: hsl(0, 0%, 98%);
 }
 
@@ -146,13 +146,14 @@ code {
 }
 .validator__textarea {
   font-family: "Ubuntu Mono", monospace;
+  font-size: 16rem;
   resize: none;
-  height: 300px;
+  height: 380px;
   border: 2rem solid hsl(0, 0%, 83%);
   border-radius: 1em;
   padding: 1em;
-  background: #fafafa;
-  box-shadow: 20rem 20rem 60rem #d5d5d5, -20rem -20rem 60rem #ffffff;
+  background: hsl(0, 0%, 100%);
+  box-shadow: 15rem 15rem 30rem hsl(0, 0%, 85%), -15rem -15rem 30rem hsl(0, 0%, 100%);
 }
 @media only all and (max-width: 29.99em) {
   .validator__button {
@@ -160,7 +161,7 @@ code {
   }
 }
 .validator__result {
-  border-top: 1px solid hsl(0, 0%, 93%);
+  border-top: 1rem solid hsl(0, 0%, 93%);
   padding-top: 18rem;
 }
 
@@ -177,7 +178,7 @@ code {
   margin-top: 1em;
 }
 .item-result {
-  background-color: hsla(0, 100%, 67%, 0.05);
+  background-color: hsla(348, 83%, 47%, 0.05);
   padding: 1em;
   border-radius: 1em;
 }
@@ -185,13 +186,13 @@ code {
   margin-top: 0.5em;
 }
 .item-result__label {
-  color: hsl(0, 100%, 67%);
+  color: hsl(348, 83%, 47%);
 }
 .item-result__desc {
   font-size: 17rem;
 }
 .item-result__desc span {
-  color: hsl(0, 100%, 67%);
+  color: hsl(0, 59%, 41%);
 }
 
 .footer {
@@ -203,5 +204,4 @@ code {
 }
 .footer__paragraph {
   text-align: center;
-  font-size: 16rem;
 }

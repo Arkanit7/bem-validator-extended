@@ -1,0 +1,29 @@
+doctype html
+html(lang="uk")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title Розширений БЕМ валідатор
+		meta(name="description", content="Валідатор методології БЕМ за розширеними правилами.")
+		link(rel='icon', type='image/png', sizes='32x32', href='img/favicon-32x32.png')
+		link(rel='icon', type='image/png', sizes='16x16', href='img/favicon-16x16.png')
+		link(href="css/style.css" rel="stylesheet")
+		script(src="js/script.js" defer)
+	body
+		.wrapper
+			header.header
+				.header__container
+			main.main
+				article.validator
+					.validator__container
+						.validator__main
+							h1.validator__title Розширений 
+								span БЕМ
+								|  валідатор
+							textarea.validator__textarea(placeholder="Ваш HTML-код" data-validate-input autocomplete="off" autocorrect="off" spellcheck="false" data-gramm="false")
+							button.validator__button.button(type='button' data-validate-submit) Перевірити
+							p Валідатор не є на 100% точним та все ще перебуває на стадії розробки. Використовуйте на свій страх та ризик.
+						.validator__result.result(data-validate-result)
+			footer.footer
+				.footer__container
+					p.footer__paragraph Створено спеціально для "Найкращого курсу по верстці сайтів". Весна 2024

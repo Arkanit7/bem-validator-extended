@@ -15,8 +15,9 @@ const ERROR_TRANSLATION = {
     [ERROR_CODES.ELEMENT_OF_ELEMENT]: 'Подвійний елемент',
     [ERROR_CODES.RECURSIVE_BLOCK]: 'Блок знаходиться в блоці з тим же іменем',
     [ERROR_CODES.RECURSIVE_ELEMENT]:
-      'елемент знаходиться в елементі з тим же іменем',
-    [ERROR_CODES.NO_PARENT_BLOCK]: 'Елемент немає батька',
+      'Елемент знаходиться в елементі з тим же іменем',
+    [ERROR_CODES.NO_PARENT_BLOCK]:
+      'БЕМ-елемент не може знаходитись за межами свого БЕМ-блоку',
     [ERROR_CODES.ONLY_MODIFIER]:
       'Модифікатор використовується без блока обо елемента',
     [ERROR_CODES.MORE_THAN_ONE_BLOCK]:
@@ -26,7 +27,7 @@ const ERROR_TRANSLATION = {
     [ERROR_CODES.HIERARCHY]:
       'При формуванні імені класу не має бути спроби ієрархії',
     [ERROR_CODES.ONLY_CLOSEST_PARENT]:
-      'Елемент має бути елементом лише найближчого блоку',
+      'Назва елементу починається не з першого батьківського БЕМ-блоку',
   },
   en: {
     [ERROR_CODES.ELEMENT_OF_ELEMENT]: 'It could not be element of element',
@@ -45,6 +46,12 @@ const ERROR_TRANSLATION = {
   },
 }
 
+function getParentPath(parentArray) {
+  const filteredArray = parentArray.filter((array) => array.length > 0)
+	const mappedArray = filteredArray.map(array=>array.join('.'))
+  return `.${mappedArray.join(' > .')}`
+}
+
 function parseClassName(className) {
   const regExp =
     /(?:^|\s)([a-z]+(?:-[a-z]+)*)(?:__([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?/i
@@ -56,32 +63,17 @@ function parseClassName(className) {
 }
 
 function getBemType(className) {
-  const { blockName, elementName, modifierName, modifierValue } =
-    parseClassName(className)
-  if (blockName && !elementName && !modifierName) return 'BLOCK'
-  if (blockName && elementName && !modifierName) return 'ELEMENT'
-  return 'MODIFIER'
+  const { elementName, modifierName } = parseClassName(className)
+
+  if (modifierName) return 'MODIFIER'
+  if (elementName) return 'ELEMENT'
+  return 'BLOCK'
 }
 
 function testElementForClosestParent(blockName, parentArray = []) {
-  for (let i = parentArray.length - 1; i >= 0; i--) {
-    const parentType = getBemType(parentArray[i])
-    if (parentType === 'BLOCK') {
-      if (blockName === parseClassName(parentArray[i]).blockName) return false
-      return true
-    }
-  }
-}
-
-function testElementForHierarchy(elementName, parentArray = []) {
-  for (let i = parentArray.length - 1; i >= 0; i--) {
-    const parentType = getBemType(parentArray[i])
-
-    if (parentType === 'BLOCK') break
-    if (
-      parentType === 'ELEMENT' &&
-      elementName.startsWith(parseClassName(parentArray[i]).elementName)
-    )
+  for (let i = parentArray.flat().length - 1; i >= 0; i -= 1) {
+    if (parentArray.flat()[i] === blockName) return false
+    if (parseClassName(parentArray.flat()[i]).blockName !== blockName)
       return true
   }
   return false
@@ -93,8 +85,7 @@ function validateNode(node, parentArray = []) {
   const currentClasses = [...node.classList]
 
   currentClasses.forEach((className) => {
-    const { blockName, elementName, modifierName, modifierValue } =
-      parseClassName(className)
+    const { blockName, elementName, modifierName } = parseClassName(className)
     const type = getBemType(className)
 
     if (
@@ -137,8 +128,7 @@ function validateNode(node, parentArray = []) {
     }
 
     if (
-      !elementName &&
-      !modifierName &&
+      type === 'BLOCK' &&
       parentArray.flat().some((parentClass) => parentClass === blockName)
     ) {
       errors.push({
@@ -189,7 +179,9 @@ function validateNode(node, parentArray = []) {
     // HIERARCHY
     if (
       type === 'BLOCK' &&
-      parentArray?.some((parentName) => blockName.startsWith(parentName))
+      parentArray
+        .flat()
+        .some((parentName) => blockName.startsWith(`${parentName}-`))
     ) {
       errors.push({
         code: ERROR_CODES.HIERARCHY,
@@ -200,7 +192,9 @@ function validateNode(node, parentArray = []) {
 
     if (
       type === 'ELEMENT' &&
-      testElementForHierarchy(elementName, parentArray)
+      parentArray
+        .flat()
+        .some((parentClass) => className.startsWith(`${parentClass}-`))
     ) {
       errors.push({
         code: ERROR_CODES.HIERARCHY,
@@ -223,7 +217,7 @@ function validateNode(node, parentArray = []) {
   })
 
   children?.forEach((child) => {
-    const childErrors = validateNode(child, [...parentArray, ...currentClasses])
+    const childErrors = validateNode(child, [...parentArray, currentClasses])
     errors.push(...childErrors)
   })
 
@@ -235,20 +229,18 @@ function insertErrors(errors) {
   result.innerHTML = '<h2 class="result__title">Добре!</h2>'
 
   if (errors.length === 0) return
-
   let output = ''
 
   errors.forEach((error) => {
-    const errorCode = error.code
     output += `<li class="result__item item-result">
 		<p class="item-result__label">
-		${ERROR_TRANSLATION.uk[errorCode]}
+		${ERROR_TRANSLATION.uk[error.code]}
 		</p>
 		<p class="item-result__desc">
 			<code>
-				.${error.parentArray.join(' > .')} >
-				<span>.${error.className}</span></code
-			>
+				${getParentPath(error.parentArray)} >
+				<span>.${error.className}</span>
+			</code>
 		</p>
 	</li>`
   })
@@ -264,11 +256,9 @@ function insertErrors(errors) {
 function validate() {
   const textarea = document.querySelector('[data-validate-input]')
   const input = textarea.value
-
   const parser = new DOMParser()
   const { body } = parser.parseFromString(input, 'text/html')
-
-  const errors = validateNode(body, [])
+  const errors = validateNode(body)
 
   insertErrors(errors)
 }

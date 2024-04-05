@@ -1,7 +1,9 @@
 /* Noto Sans 100-900 */
-@import 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono&display=swap';
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono&display=swap");
+
 /* Ubuntu  Mono 400 */
-@import 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap';
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+
 /* Reset styles v3.0.0 */
 *,
 *::before,
@@ -71,9 +73,9 @@ option {
   cursor: pointer;
 }
 
-input[type=text],
-input[type=email],
-input[type=tel],
+input[type="text"],
+input[type="email"],
+input[type="tel"],
 textarea {
   appearance: unset;
 }
@@ -87,10 +89,10 @@ body {
   line-height: 1.4;
   font-size: 16rem;
   font-family: "Noto Sans", sans-serif;
-  background-color: hsl(0, 0%, 98%);
+  background-color: hsl(0deg 0% 98%);
 }
 
-[class*=__container] {
+[class*="__container"] {
   max-width: 1202rem;
   margin-inline: auto;
   padding-inline: 16rem;
@@ -101,13 +103,15 @@ code {
 }
 
 .button {
-  background-color: hsl(0, 0%, 48%);
-  color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 48%);
+  color: hsl(0deg 0% 100%);
   padding: 1em 2em;
   border-radius: 9in;
   transition: 0.2s background-color;
 }
-.button:hover, .button:focus-visible {
+
+.button:hover,
+.button:focus-visible {
   background-color: rosybrown;
 }
 
@@ -123,85 +127,109 @@ code {
 }
 
 .header {
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 100%);
+}
+
+.title {
+  font-size: 32rem;
+  font-weight: 700;
+  color: hsl(0deg 0% 40%);
+}
+
+.title__mark {
+  color: rosybrown;
+}
+
+.title__small {
+  font-size: 0.5em;
 }
 
 .validator__container {
   padding-block: 32rem;
 }
+
 .validator__container > :not(:last-child) {
   margin-bottom: 32rem;
 }
+
 .validator__main > :not(:last-child) {
   margin-bottom: 24rem;
 }
+
 .validator__title {
   text-align: center;
-  font-size: 32rem;
-  font-weight: 700;
-  color: hsl(0, 0%, 40%);
 }
-.validator__title span {
-  color: rosybrown;
-}
+
 .validator__textarea {
   font-family: "Ubuntu Mono", monospace;
   font-size: 16rem;
   resize: none;
   height: 380px;
-  border: 2rem solid hsl(0, 0%, 83%);
+  border: 2rem solid hsl(0deg 0% 83%);
   border-radius: 1em;
   padding: 1em;
-  background: hsl(0, 0%, 100%);
-  box-shadow: 15rem 15rem 30rem hsl(0, 0%, 85%), -15rem -15rem 30rem hsl(0, 0%, 100%);
+  background: hsl(0deg 0% 100%);
+  box-shadow: 15rem 15rem 30rem hsl(0deg 0% 85%),
+    -15rem -15rem 30rem hsl(0deg 0% 100%);
 }
+
 @media only all and (max-width: 29.99em) {
   .validator__button {
     width: 100%;
   }
 }
+
 .validator__result {
-  border-top: 1rem solid hsl(0, 0%, 93%);
+  border-top: 1rem solid hsl(0deg 0% 93%);
   padding-top: 18rem;
 }
 
 .result > * + * {
   margin-top: 1em;
 }
+
 .result__title {
   font-size: 24rem;
   font-weight: 500;
   text-align: center;
-  color: hsl(0, 0%, 40%);
+  color: hsl(0deg 0% 40%);
 }
+
 .result__list > * + * {
   margin-top: 1em;
 }
+
 .item-result {
-  background-color: hsla(348, 83%, 47%, 0.05);
+  background-color: hsl(348deg 83% 47% / 5%);
   padding: 1em;
   border-radius: 1em;
 }
+
 .item-result > * + * {
   margin-top: 0.5em;
 }
+
 .item-result__label {
-  color: hsl(348, 83%, 47%);
+  color: hsl(348deg 83% 47%);
 }
+
 .item-result__desc {
   font-size: 17rem;
 }
+
 .item-result__desc span {
-  color: hsl(0, 59%, 41%);
+  color: hsl(0deg 59% 41%);
 }
 
 .footer {
-  border-top: 1px solid hsl(0, 0%, 93%);
-  background-color: hsl(0, 0%, 100%);
+  border-top: 1px solid hsl(0deg 0% 93%);
+  background-color: hsl(0deg 0% 100%);
 }
+
 .footer__container {
   padding-block: 32rem;
 }
+
 .footer__paragraph {
   text-align: center;
 }

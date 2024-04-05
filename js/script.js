@@ -53,8 +53,12 @@ function getParentPath(parentArray) {
 }
 
 function parseClassName(className) {
-  const regExp =
-    /(?:^|\s)([a-z]+(?:-[a-z]+)*)(?:__([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?/i
+  // const regExp =
+  //   /(?:^|\s)([a-z]+(?:-[a-z]+)*)(?:__([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?/i;
+
+	// Now includes numbers
+	const regExp = /(?:^|\s)([a-z0-9]+(?:-[a-z0-9]+)*)(?:__([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?/i
+
 
   const [, blockName, elementName, modifierName, modifierValue] =
     regExp.exec(className)

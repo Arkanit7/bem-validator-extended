@@ -53,10 +53,6 @@ function getParentPath(parentArray) {
 }
 
 function parseClassName(className) {
-  // const regExp =
-  //   /(?:^|\s)([a-z]+(?:-[a-z]+)*)(?:__([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?/i;
-
-  // Now includes numbers
   const regExp =
     /(?:^|\s)([a-z0-9]+(?:-[a-z0-9]+)*)(?:__([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?/i
 
@@ -190,7 +186,7 @@ function validateNode(node, parentArray = []) {
       type === 'BLOCK' &&
       parentArray
         .flat()
-        .some((parentName) => blockName.startsWith(`${parentName}-`))
+        .some((parentClass) => blockName.startsWith(`${parentClass}-`))
     ) {
       errors.push({
         code: ERROR_CODES.HIERARCHY,
@@ -201,9 +197,10 @@ function validateNode(node, parentArray = []) {
 
     if (
       type === 'ELEMENT' &&
-      parentArray
-        .flat()
-        .some((parentClass) => className.startsWith(`${parentClass}-`))
+      parentArray.flat().some((parentClass) => {
+        if (getBemType(parentClass) !== 'ELEMENT') return false
+        return className.startsWith(`${parentClass}-`)
+      })
     ) {
       errors.push({
         code: ERROR_CODES.HIERARCHY,

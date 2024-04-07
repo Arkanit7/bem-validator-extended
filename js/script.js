@@ -48,7 +48,7 @@ const ERROR_TRANSLATION = {
 
 function getParentPath(parentArray) {
   const filteredArray = parentArray.filter((array) => array.length > 0)
-	const mappedArray = filteredArray.map(array=>array.join('.'))
+  const mappedArray = filteredArray.map((array) => array.join('.'))
   return `.${mappedArray.join(' > .')}`
 }
 
@@ -56,9 +56,9 @@ function parseClassName(className) {
   // const regExp =
   //   /(?:^|\s)([a-z]+(?:-[a-z]+)*)(?:__([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?(?:--([a-z]+(?:-[a-z]+)*))?/i;
 
-	// Now includes numbers
-	const regExp = /(?:^|\s)([a-z0-9]+(?:-[a-z0-9]+)*)(?:__([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?/i
-
+  // Now includes numbers
+  const regExp =
+    /(?:^|\s)([a-z0-9]+(?:-[a-z0-9]+)*)(?:__([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?(?:--([a-z0-9]+(?:-[a-z0-9]+)*))?/i
 
   const [, blockName, elementName, modifierName, modifierValue] =
     regExp.exec(className)
@@ -75,9 +75,14 @@ function getBemType(className) {
 }
 
 function testElementForClosestParent(blockName, parentArray = []) {
-  for (let i = parentArray.flat().length - 1; i >= 0; i -= 1) {
-    if (parentArray.flat()[i] === blockName) return false
-    if (parseClassName(parentArray.flat()[i]).blockName !== blockName)
+  for (let i = parentArray.length - 1; i >= 0; i -= 1) {
+    // If we found parent, then we're done here.
+    if (parentArray[i].some((parentClass) => parentClass === blockName)) break
+
+    // If the parent is block, then it's not the right one!
+    if (
+      parentArray[i].some((parentClass) => getBemType(parentClass) === 'BLOCK')
+    )
       return true
   }
   return false

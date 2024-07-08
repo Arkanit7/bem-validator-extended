@@ -1,30 +1,54 @@
 doctype html
-html(lang="uk")
-	head
-		meta(charset="UTF-8")
-		meta(name="viewport" content="width=device-width, initial-scale=1.0")
-		title Розширений БЕМ валідатор
-		meta(name="description", content="Валідатор методології БЕМ за розширеними правилами.")
-		link(rel='icon', type='image/png', sizes='32x32', href='img/favicon-32x32.png')
-		link(rel='icon', type='image/png', sizes='16x16', href='img/favicon-16x16.png')
-		link(href="css/style.css" rel="stylesheet")
-		script(src="js/script.js" defer)
-	body
-		.wrapper
-			header.header
-				.header__container
-			main.main
-				article.validator
-					.validator__container
-						.validator__main
-							h1.validator__title.title Розширений 
-								span.title__mark БЕМ
-								|  валідатор 
-								span.title__small v0.2.2
-							textarea.validator__textarea(placeholder="Ваш HTML-код" data-validate-input autocomplete="off" autocorrect="off" spellcheck="false" data-gramm="false")
-							button.validator__button.button(type='button' data-validate-submit) Перевірити
-							p Валідатор не є на 100% точним та все ще перебуває на стадії тестування.
-						.validator__result.result(data-validate-result)
-			footer.footer
-				.footer__container
-					p.footer__paragraph Створено спеціально для "Найкращого курсу по верстці сайтів". Весна 2024
+html(lang="en")
+  head
+    title FLS БЕМ валідатор
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    meta(
+      name="description",
+      content="Валідатор для перевірки методології БЕМ за розширеними правилами."
+    )
+    meta(name="theme-color", content="#46e7d1")
+    link(
+      rel="icon",
+      type="image/png",
+      sizes="32x32",
+      href="img/favicon-32x32.png"
+    )
+    link(
+      rel="icon",
+      type="image/png",
+      sizes="16x16",
+      href="img/favicon-16x16.png"
+    )
+    link(href="css/style.css", rel="stylesheet")
+    script(src="js/validation.js", defer)
+    script(src="js/main.js", defer)
+  body
+    .wrapper
+      header#page-header.header
+        .header__container
+          h1.title Розширений #[span.title__mark БЕМ] валідатор #[span.title__small v1.0.0]
+      main.wrapper__main.main
+        .validator
+          .validator__container
+            .validator__body
+              textarea.validator__textarea(
+                placeholder="Вставте в це поле Ваш HTML код",
+                data-validate-input,
+                autocomplete="off",
+                spellcheck="false",
+                data-gramm="false"
+              )
+              button.validator__button(type="button", data-validate-submit)
+                span Перевірити
+            .validator__result.result(data-validate-result)
+            img.character-image(src="img/character.webp", alt="Жека")
+      footer.footer
+        .footer__container
+          p Створено спеціально для
+            |
+            |
+            a(href="https://edu.fls.guru/", target="_blank") "Найкращого курсу з розробки якісних WEB-інтерфейсів"
+        a#scroll-button(href="#page-header")
+          img(src="img/arrow-to-top.svg", alt="Image")

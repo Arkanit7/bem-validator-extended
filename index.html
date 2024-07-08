@@ -1,1 +1,43 @@
-<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Розширений БЕМ валідатор</title><meta name="description" content="Валідатор методології БЕМ за розширеними правилами."><link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png"><link href="css/style.css" rel="stylesheet"><script src="js/script.js" defer></script></head><body><div class="wrapper"><header class="header"><div class="header__container"></div></header><main class="main"><article class="validator"><div class="validator__container"><div class="validator__main"><h1 class="validator__title title">Розширений <span class="title__mark">БЕМ</span> валідатор <span class="title__small">v0.2.3</span></h1><textarea class="validator__textarea" placeholder="Ваш HTML-код" data-validate-input autocomplete="off" autocorrect="off" spellcheck="false" data-gramm="false"></textarea><button class="validator__button button" type="button" data-validate-submit>Перевірити</button><p>Валідатор не є на 100% точним та все ще перебуває на стадії тестування.</p></div><div class="validator__result result" data-validate-result></div></div></article></main><footer class="footer"><div class="footer__container"><p class="footer__paragraph">Створено спеціально для "Найкращого курсу по верстці сайтів". Весна 2024</p></div></footer></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FLS БЕМ валідатор</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Валідатор для перевірки методології БЕМ за розширеними правилами.">
+    <meta name="theme-color" content="#46e7d1">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/validation.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header" id="page-header">
+        <div class="header__container">
+          <h1 class="title">Розширений <span class="title__mark">БЕМ</span> валідатор <span class="title__small">v1.0.0</span></h1>
+        </div>
+      </header>
+      <main class="wrapper__main main">
+        <div class="validator">
+          <div class="validator__container">
+            <div class="validator__body">
+              <textarea class="validator__textarea" placeholder="Вставте в це поле Ваш HTML код" data-validate-input autocomplete="off" spellcheck="false" data-gramm="false"></textarea>
+              <button class="validator__button" type="button" data-validate-submit><span>Перевірити</span></button>
+            </div>
+            <div class="validator__result result" data-validate-result></div><img class="character-image" src="img/character.webp" alt="Жека">
+          </div>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer__container">
+          <p>
+            Створено спеціально для
+            <a href="https://edu.fls.guru/" target="_blank">"Найкращого курсу з розробки якісних WEB-інтерфейсів"</a>
+          </p>
+        </div><a id="scroll-button" href="#page-header"><img src="img/arrow-to-top.svg" alt="Image"></a>
+      </footer>
+    </div>
+  </body>
+</html>

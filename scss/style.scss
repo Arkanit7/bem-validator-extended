@@ -153,9 +153,11 @@ body {
   z-index: 1;
 }
 
-/* .validator__button:hover {
-  color: #fff;
-} */
+.validator__button:hover {
+  @media (prefers-color-scheme: light) {
+    color: hsl(0deg 0% 100%);
+  }
+}
 
 .validator__button:active {
   border-color: var(--bg-accent);

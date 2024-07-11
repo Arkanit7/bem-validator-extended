@@ -292,8 +292,8 @@ function validate() {
   }
 
   const parser = new DOMParser()
-  const { body } = parser.parseFromString(input, 'text/html')
-  const errors = validateNode(body)
+  const { documentElement } = parser.parseFromString(input, 'text/html')
+  const errors = validateNode(documentElement)
 
   insertErrors(errors)
 }

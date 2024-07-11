@@ -46,6 +46,17 @@ const ERROR_TRANSLATION = {
   },
 }
 
+const IGNORE_CLASSES = [
+  'swiper',
+  'swiper-wrapper',
+  'swiper-slide',
+  'swiper-pagination',
+  'swiper-navigation',
+  'swiper-button-prev',
+  'swiper-button-next',
+  'swiper-scrollbar',
+]
+
 function getParentPathWithHighlight(parentArray, errorClass) {
   const filteredArray = parentArray.filter((array) => array.length > 0)
   const mappedArray = filteredArray.map((array) => array.join('.'))
@@ -93,7 +104,9 @@ function testElementForClosestParent(blockName, parentArray = []) {
 function validateNode(node, parentArray = []) {
   const errors = []
   const children = [...node.children]
-  const currentClasses = [...node.classList]
+  const currentClasses = [...node.classList].filter(
+    (className) => !IGNORE_CLASSES.includes(className),
+  )
 
   currentClasses.forEach((className) => {
     const { blockName, elementName, modifierName } = parseClassName(className)

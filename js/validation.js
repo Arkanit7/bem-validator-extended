@@ -128,7 +128,7 @@ function validateNode(node, parentArray = []) {
       !currentClasses.find((currentClass) =>
         elementName
           ? currentClass === `${blockName}__${elementName}`
-          : blockName === currentClass
+          : blockName === currentClass,
       )
     ) {
       errors.push({
@@ -158,34 +158,34 @@ function validateNode(node, parentArray = []) {
     }
 
     // MORE_THAN_ONE_BLOCK
-    if (
-      type === 'BLOCK' &&
-      currentClasses.filter((currentClass) => {
-        const parentType = getBemType(currentClass)
-        return parentType === 'BLOCK'
-      }).length > 1
-    ) {
-      errors.push({
-        code: ERROR_CODES.MORE_THAN_ONE_BLOCK,
-        className,
-        parentArray,
-      })
-    }
+    // if (
+    //   type === 'BLOCK' &&
+    //   currentClasses.filter((currentClass) => {
+    //     const parentType = getBemType(currentClass)
+    //     return parentType === 'BLOCK'
+    //   }).length > 1
+    // ) {
+    //   errors.push({
+    //     code: ERROR_CODES.MORE_THAN_ONE_BLOCK,
+    //     className,
+    //     parentArray,
+    //   })
+    // }
 
     // MORE_THAN_ONE_ELEMENT
-    if (
-      type === 'ELEMENT' &&
-      currentClasses.filter((currentClass) => {
-        const parentType = getBemType(currentClass)
-        return parentType === 'ELEMENT'
-      }).length > 1
-    ) {
-      errors.push({
-        code: ERROR_CODES.MORE_THAN_ONE_ELEMENT,
-        className,
-        parentArray,
-      })
-    }
+    // if (
+    //   type === 'ELEMENT' &&
+    //   currentClasses.filter((currentClass) => {
+    //     const parentType = getBemType(currentClass)
+    //     return parentType === 'ELEMENT'
+    //   }).length > 1
+    // ) {
+    //   errors.push({
+    //     code: ERROR_CODES.MORE_THAN_ONE_ELEMENT,
+    //     className,
+    //     parentArray,
+    //   })
+    // }
 
     // HIERARCHY
     if (
@@ -242,14 +242,16 @@ function insertErrors(errors, emptyInput = false) {
   if (emptyInput) {
     result.classList.remove('errors', 'no-errors')
     result.classList.add('errors')
-    result.innerHTML = '<h2 class="result__title">Вставте код в поле для валідації</h2>'
+    result.innerHTML =
+      '<h2 class="result__title">Вставте код в поле для валідації</h2>'
     return
   }
 
   if (errors.length === 0) {
     result.classList.remove('errors', 'no-errors')
     result.classList.add('no-errors')
-    result.innerHTML = '<h2 class="result__title">Відмінно, помилки відсутні 😎</h2>'
+    result.innerHTML =
+      '<h2 class="result__title">Відмінно, помилки відсутні 😎</h2>'
     return
   }
 
@@ -303,4 +305,3 @@ function initialize() {
 }
 
 initialize()
-

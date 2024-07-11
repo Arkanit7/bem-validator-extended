@@ -21,28 +21,28 @@ const ERROR_TRANSLATION = {
     [ERROR_CODES.ONLY_MODIFIER]:
       'Модифікатор використовується без блока обо елемента',
     [ERROR_CODES.MORE_THAN_ONE_BLOCK]:
-      "Об'єкт не може бути одночасно двома BEM-блоками",
+      'Вузол не може бути одночасно двома БЕМ-блоками',
     [ERROR_CODES.MORE_THAN_ONE_ELEMENT]:
-      "Об'єкт не може бути одночасно двома BEM-елементами",
+      'Вузол не може бути одночасно двома БЕМ-елементами',
     [ERROR_CODES.HIERARCHY]:
-      'При формуванні імені класу не має бути спроби ієрархії',
+      'При формуванні імені класу не має прослідковуватися ієрархія',
     [ERROR_CODES.ONLY_CLOSEST_PARENT]:
-      'Назва елементу починається не з першого батьківського БЕМ-блоку',
+      'БЕМ-елемент не є елементом найближчого батьківського БЕМ-блоку',
   },
   en: {
-    [ERROR_CODES.ELEMENT_OF_ELEMENT]: 'It could not be element of element',
+    [ERROR_CODES.ELEMENT_OF_ELEMENT]: 'Double element',
     [ERROR_CODES.RECURSIVE_BLOCK]: 'Block is in block with same name',
     [ERROR_CODES.RECURSIVE_ELEMENT]: 'Element is in element with same name',
     [ERROR_CODES.NO_PARENT_BLOCK]: 'Element was used without block as parent',
     [ERROR_CODES.ONLY_MODIFIER]: 'Modifier was used without block or element',
     [ERROR_CODES.MORE_THAN_ONE_BLOCK]:
-      "Об'єкт не може бути одночасно двома BEM-блоками",
+      'The node cannot have two BEM blocks at the same time',
     [ERROR_CODES.MORE_THAN_ONE_ELEMENT]:
-      "Об'єкт не може бути одночасно двома BEM-елементами",
+      'The node cannot have two BEM elements at the same time',
     [ERROR_CODES.HIERARCHY]:
-      'При формуванні імені класу не має бути спроби ієрархії',
+      'When forming a class name, the hierarchy should not be traced',
     [ERROR_CODES.ONLY_CLOSEST_PARENT]:
-      'Елемент має бути елементом лише найближчого блоку',
+      'The BEM element is not an element of the nearest parent BEM block',
   },
 }
 

@@ -4,22 +4,27 @@
 /* Ubuntu  Mono 400 */
 @import "https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap";
 
-// Reset styles
+// RFS
+$rfs-breakpoint: 70em;
+$rfs-breakpoint-unit: em;
+
 @import "rfs";
+
+// Reset styles
 @import "reset";
 
 :root {
   --text-primary: hsl(0deg 0% 100%);
   --text-secondary: hsl(0deg 0% 71%);
   --text-invert: hsl(0deg 0% 0% / 0%);
-  --text-accent: hsl(187deg 95% 50%);
-  --bg-primary: hsl(0deg 0% 0%);
-  --bg-secondary: hsl(0deg 7% 13%);
+  --text-accent: hsl(185deg 86% 50%);
+  --bg-primary: hsl(0deg 6% 4%);
+  --bg-secondary: hsl(0deg 6% 13%);
   --bg-invert: hsl(0deg 0% 100%);
-  --bg-accent: rgb(0 182 45);
-  --bg-accent-invert: rgb(139 71 71);
-  --bg-errors: rgb(240 48 48 / 20%);
-  --decore-transparent: rgb(121 195 255 / 53.4%);
+  --bg-accent: hsl(135deg 86% 36%);
+  --bg-accent-invert: hsl(0deg 32% 41%);
+  --bg-errors: hsl(0deg 86% 56% / 20%);
+  --decor-transparent: hsl(207deg 100% 74% / 53.4%);
 
   color-scheme: light dark;
 }
@@ -32,10 +37,10 @@
     --bg-primary: hsl(0deg 0% 99%);
     --bg-secondary: hsl(172deg 77% 59%);
     --bg-invert: hsl(0deg 0% 0%);
-    --bg-accent: rgb(0 182 45);
+    --bg-accent: hsl(135deg 86% 36%);
     --bg-accent-invert: rgb(80 182 207);
     --bg-errors: rgb(240 48 48 / 20%);
-    --decore-transparent: rgb(97 194 145 / 53.4%);
+    --decor-transparent: rgb(97 194 145 / 53.4%);
   }
 }
 
@@ -49,14 +54,14 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  overflow: clip;
   min-block-size: 100%;
+  overflow: clip;
 }
 
 [class*="__container"] {
-  max-inline-size: 79.375rem; /* 1270/16 */
-  margin-inline: auto;
+  max-inline-size: 70rem; /* 1200/16 */
   padding-inline: 1rem;
+  margin-inline: auto;
 }
 
 .wrapper__main {
@@ -64,152 +69,164 @@ body {
 }
 
 /* ============================================================================================================== */
-.header {
-  /* position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%; */
-  // padding-block: 1.875rem; /* 30/16 */
-  @include rfs(1.875rem, padding-block);
 
-  background-color: var(--bg-secondary);
+.button {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding-block: 0.6em;
+  padding-inline: 2em;
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border: var(--text-accent) solid 0.15em;
+  border-radius: 0.25em;
+  transition:
+    border 0.3s,
+    color 0.3s;
+
+  &:hover {
+    @media (any-hover) {
+      @media (prefers-color-scheme: light) {
+        color: hsl(0deg 0% 100%);
+      }
+    }
+  }
+
+  &:active {
+    border-color: var(--bg-accent);
+  }
+
+  &::after,
+  &::before {
+    position: absolute;
+    inline-size: 120%;
+    aspect-ratio: 1;
+    content: "";
+    background-color: var(--text-accent);
+    border-radius: 50%;
+    opacity: 0.5;
+    transition:
+      transform 500ms,
+      background-color 300ms;
+  }
+
+  &::before {
+    inset-inline-start: 0;
+    transform: translateX(-90%);
+  }
+
+  &::after {
+    inset-inline-end: 0;
+    transform: translateX(90%);
+  }
+
+  &:active::before,
+  &:active::after {
+    background-color: var(--bg-accent);
+  }
+
+  &:focus-visible::before {
+    transform: translateX(-10%);
+  }
+
+  &:focus-visible::after {
+    transform: translateX(10%);
+  }
+
+  @media (any-hover) {
+    &:hover::before {
+      transform: translateX(-10%);
+    }
+
+    &:hover::after {
+      transform: translateX(10%);
+    }
+  }
+
+  & span {
+    z-index: 1;
+  }
 }
 
-/* ============================================================================================================== */
 .title {
   @include font-size(2rem);
 
   font-weight: 700;
-  text-align: center;
   color: var(--text-primary);
+  text-align: center;
+
+  &__mark {
+    color: var(--text-accent);
+  }
+
+  &__small {
+    font-size: 0.5em;
+  }
 }
 
-.title__mark {
-  color: var(--text-accent);
-}
+/* ============================================================================================================== */
 
-.title__small {
-  font-size: 0.5em;
+.header {
+  @include rfs(1.5rem, padding-block);
+
+  background-color: var(--bg-secondary);
+
+  // &--sticky {
+  //   position: sticky;
+  //   z-index: 100;
+  //   inset-block-start: 0;
+  // }
 }
 
 /* ============================================================================================================== */
 
 .validator {
   @include rfs(2.5rem, padding-block);
-}
 
-.validator__body {
-  padding-block-end: 1.875rem; /* 30/16 */
-}
+  &__body {
+    padding-block-end: 1.875rem; /* 30/16 */
 
-.validator__body > :not(:last-child) {
-  margin-block-end: 1.5rem; /* 24/16 */
-}
-
-.validator__textarea {
-  min-block-size: 18.75rem; /* 300/16 */
-  max-block-size: 31.25rem; /* 500/16 */
-  padding: 1em;
-  border: 0.125rem solid var(--text-accent);
-  border-radius: 1em;
-  background: var(--bg-primary);
-  box-shadow: 0 0 2rem 0.5rem var(--decore-transparent);
-  font-size: 1rem;
-  font-family: "Ubuntu Mono", monospace;
-  color: var(--text-primary);
-  resize: vertical;
-  overflow: auto;
-}
-
-.validator__textarea::placeholder {
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: opacity 0.4s;
-}
-
-.validator__textarea:focus::placeholder {
-  opacity: 0;
-}
-
-.validator__button {
-  display: inline-grid;
-  place-items: center;
-  position: relative;
-  padding-block: 0.6em;
-  padding-inline: 2em;
-  border: var(--text-accent) solid 0.15em;
-  border-radius: 0.25em;
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  font-weight: 600;
-  overflow: hidden;
-  transition:
-    border 0.3s,
-    color 0.3s;
-}
-
-.validator__button span {
-  z-index: 1;
-}
-
-.validator__button:hover {
-  @media (prefers-color-scheme: light) {
-    color: hsl(0deg 0% 100%);
+    & > :not(:last-child) {
+      margin-block-end: 1.5rem; /* 24/16 */
+    }
   }
-}
 
-.validator__button:active {
-  border-color: var(--bg-accent);
-}
+  &__textarea {
+    min-block-size: 18.75rem; /* 300/16 */
+    max-block-size: 31.25rem; /* 500/16 */
+    padding: 1em;
+    overflow: auto;
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 1rem;
+    color: var(--text-primary);
+    caret-color: var(--text-accent);
+    resize: vertical;
+    background: var(--bg-primary);
+    border: 0.125rem solid var(--text-accent);
+    border-radius: 1em;
+    box-shadow: 0 0 2rem 0.5rem var(--decor-transparent);
 
-.validator__button::after,
-.validator__button::before {
-  content: "";
-  position: absolute;
-  inline-size: 120%;
-  aspect-ratio: 1;
-  background: var(--text-accent);
-  opacity: 0.5;
-  border-radius: 50%;
-  transition:
-    transform 500ms,
-    background 300ms;
-}
+    &::placeholder {
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: opacity 0.4s;
+    }
 
-.validator__button::before {
-  inset-inline-start: 0;
-  transform: translateX(-90%);
-}
+    &:focus::placeholder {
+      opacity: 0;
+    }
+  }
 
-.validator__button::after {
-  inset-inline-end: 0;
-  transform: translateX(90%);
-}
-
-.validator__button:hover::before,
-.validator__button:focus-visible::before {
-  transform: translateX(-10%);
-}
-
-.validator__button:hover::after,
-.validator__button:focus-visible::after {
-  transform: translateX(10%);
-}
-
-.validator__button:active::before,
-.validator__button:active::after {
-  background: var(--bg-accent);
+  &__button {
+    @media (width < 30em) {
+      inline-size: 100%;
+    }
+  }
 }
 
 /* ============================================================================================================== */
-
-@media (width < 30em) {
-  .validator__button {
-    inline-size: 100%;
-  }
-}
-
 .validator__result:has(.result__title) {
   padding-block-start: 1.125rem; /* 18/16 */
   border-block-start: 0.125rem solid var(--bg-invert);
@@ -224,8 +241,8 @@ body {
   @include font-size(2.5rem);
 
   font-weight: 500;
-  text-align: center;
   color: var(--text-accent);
+  text-align: center;
 }
 
 .validator__result.errors .result__title {
@@ -238,69 +255,78 @@ body {
 
 .item-result {
   padding: 1em;
-  border-radius: 1em;
   background-color: var(--bg-errors);
-}
+  border-radius: 1em;
 
-.item-result > * + * {
-  margin-block-start: 0.5em;
-}
+  & > * + * {
+    margin-block-start: 0.5em;
+  }
 
-.item-result__label {
-  color: var(--text-primary);
-}
+  &__label {
+    color: var(--text-primary);
+  }
 
-.item-result__desc {
-  font-size: 1.0625rem; /* 17/16 */
-}
+  &__desc {
+    font-size: 1.0625rem; /* 17/16 */
 
-.item-result__desc code {
-  font-family: "Ubuntu Mono", monospace;
-  color: var(--text-secondary);
-}
+    code {
+      font-family: "Ubuntu Mono", monospace;
+      color: var(--text-secondary);
+    }
 
-.item-result__desc span {
-  color: rgb(255 0 0);
-  font-weight: 600;
+    span {
+      font-weight: 600;
+      color: rgb(255 0 0);
+    }
+  }
 }
 
 /* ============================================================================================================== */
 .footer {
-  @include rfs(2rem, padding-block);
+  @include rfs(1.5rem, padding-block);
 
-  border-block-start: solid var(--bg-invert) 0.0625rem; /* 1/16 */
   background-color: var(--bg-secondary);
-}
+  border-block-start: solid var(--bg-invert) 0.0625rem; /* 1/16 */
 
-.footer__container p {
-  text-align: center;
-  color: var(--text-primary);
-  line-height: 1.4;
-  font-weight: 700;
-}
+  &__container {
+    p {
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text-primary);
+      text-align: center;
+    }
 
-.footer__container a {
-  position: relative;
-  display: inline-block;
-  color: var(--text-accent);
-}
+    a {
+      position: relative;
+      display: inline-block;
+      color: var(--text-accent);
 
-.footer__container a::before {
-  content: "";
-  position: absolute;
-  inset-block-start: 100%;
-  inset-inline-start: 0;
-  inline-size: 100%;
-  block-size: 0.125rem; /* 2/16 */
-  transform: scale(0, 1);
-  transform-origin: right;
-  transition: transform 0.3s;
-  background-color: var(--text-accent);
-}
+      &::before {
+        position: absolute;
+        inset-block-start: 100%;
+        inset-inline-start: 0;
+        inline-size: 100%;
+        block-size: 0.125rem; /* 2/16 */
+        content: "";
+        background-color: var(--text-accent);
+        transition: transform 0.3s;
+        transform: scale(0, 1);
+        transform-origin: right;
+      }
 
-.footer__container a:hover::before {
-  transform: scale(1, 1);
-  transform-origin: left;
+      &:focus-visible::before {
+        transform: scale(1, 1);
+        transform-origin: left;
+      }
+
+      &:hover::before {
+        @media (any-hover) {
+          transform: scale(1, 1);
+          transform-origin: left;
+        }
+      }
+    }
+  }
 }
 
 /* ============================================================================================================== */
@@ -310,14 +336,14 @@ body {
   inset-block-end: 0;
   inset-inline-end: 3%;
   z-index: 101;
-  transform: translateY(100%);
-  max-inline-size: 100%;
   inline-size: clamp(11.25rem, 4.513rem + 33.68vw, 31.25rem);
+  max-inline-size: 100%;
   block-size: 100svh;
+  pointer-events: none;
   object-fit: contain;
   object-position: bottom;
   transition: transform 1s;
-  pointer-events: none;
+  transform: translateY(100%);
 }
 
 .no-errors ~ .character-image {
@@ -327,15 +353,20 @@ body {
 /* ============================================================================================================== */
 #scroll-button {
   position: fixed;
-  inset-inline-end: 2.5rem; /* 40/16 */
-  inset-block-end: 1.25rem; /* 20/16 */
+  inset-block-end: 0.5rem;
+  inset-inline-end: 1rem;
   z-index: 102;
-  block-size: 3.125rem; /* 50/16 */
   inline-size: 3.125rem; /* 50/16 */
-  opacity: 0;
+  block-size: 3.125rem; /* 50/16 */
   visibility: hidden;
+  opacity: 0;
   transition: all 0.3s;
   transform: translateY(100%);
+
+  @media (48em <= width) {
+    inset-block-end: 1.25rem; /* 20/16 */
+    inset-inline-end: 2.5rem; /* 40/16 */
+  }
 }
 
 /* #scroll-button:hover {
@@ -349,8 +380,8 @@ body {
 }
 
 #scroll-button.visible {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
   transform: translateY(0);
 }
 

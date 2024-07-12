@@ -28,7 +28,7 @@ html(lang="en")
     .wrapper
       header#page-header.header
         .header__container
-          h1.title Розширений #[span.title__mark БЕМ] валідатор #[span.title__small v1.0.2]
+          h1.title Розширений #[span.title__mark БЕМ] валідатор #[span.title__small v1.1.0]
       main.wrapper__main.main
         .validator
           .validator__container
@@ -40,7 +40,10 @@ html(lang="en")
                 spellcheck="false",
                 data-gramm="false"
               )
-              button.validator__button(type="button", data-validate-submit)
+              button.validator__button.button(
+                type="button",
+                data-validate-submit
+              )
                 span Перевірити
             //- section.validator__section
             //-   h2 Версія 1.0.1
